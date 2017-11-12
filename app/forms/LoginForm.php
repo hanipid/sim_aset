@@ -69,7 +69,7 @@ class LoginForm extends Form
         $this->add($csrf);
 
         $this->add(new Submit('go', [
-            'class' => 'btn btn-success btn-block'
+            'class' => 'btn btn-primary btn-block'
         ]));
     }
 }
