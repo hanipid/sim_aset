@@ -3,13 +3,19 @@
 use Phalcon\Config;
 use Phalcon\Logger;
 
+/**
+  * Biar phalcon-dev dan webtools ga bingung cari lokasi model dan controller
+  **/
+defined('BASE_PATH') || define('BASE_PATH', dirname(__DIR__));
+defined('APP_PATH') || define('APP_PATH', BASE_PATH );
+
 return new Config([
     'database' => [
         'adapter' => 'Mysql',
         'host' => '127.0.0.1',
         'username' => 'root',
         'password' => 'secret',
-        'dbname' => 'vokuro_ori'
+        'dbname' => 'vcms'
     ],
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',
@@ -21,7 +27,10 @@ return new Config([
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/vokuro_bs3/',
         'publicUrl'      => 'vokuro.phalconphp.com',
-        'cryptSalt'      => 'eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D'
+        'cryptSalt'      => 'eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D',
+        'timezone'       => "Asia/Jakarta",
+        'timezoneGmt'    => "Europe/London",
+        'datetime'       => "Y-m-d H:i:s"
     ],
     'mail' => [
         'fromName' => 'Vokuro',

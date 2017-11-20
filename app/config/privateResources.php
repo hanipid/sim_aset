@@ -22,6 +22,18 @@ return new Config([
         ],
         'permissions' => [
             'index'
+        ],
+        'basic_settings' => [
+            'index',
+            'deleteLogo'
+        ],
+        'categories' => [
+            'index',
+            'search',
+            'new',
+            'edit',
+            'create',
+            'delete'
         ]
     ]
 ]);

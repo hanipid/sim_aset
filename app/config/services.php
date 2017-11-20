@@ -8,6 +8,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Files as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Logger\Adapter\File as FileLogger;
 use Phalcon\Logger\Formatter\Line as FormatterLine;
 use Vokuro\Auth\Auth;
@@ -60,6 +61,15 @@ $di->set('view', function () {
                 'compiledSeparator' => '_',
                 'alwaysCompile' => true
             ]);
+
+            // add native php function
+            $compiler = $volt->getCompiler();
+            $compiler->addFunction('strtotime', 'strtotime');
+            $compiler->addFunction('substr', 'substr');
+            $compiler->addFunction('strip_tags', 'strip_tags');
+            $compiler->addFunction('datetime', 'datetime');
+            $compiler->addFunction('datetimezone', 'datetimezone');
+            $compiler->addFunction('number_format', 'number_format');
 
             return $volt;
         }
@@ -136,6 +146,18 @@ $di->set('flash', function () {
         'success' => 'alert alert-success',
         'notice' => 'alert alert-info',
         'warning' => 'alert alert-warning'
+    ]);
+});
+
+/**
+ * Flash Session service with custom CSS classes
+ */
+$di->set('flashSession', function () {
+    return new FlashSession([
+        'error' => 'alert alert-danger alert-slideout',
+        'success' => 'alert alert-success alert-slideout',
+        'notice' => 'alert alert-info alert-slideout',
+        'warning' => 'alert alert-warning alert-slideout'
     ]);
 });
 
