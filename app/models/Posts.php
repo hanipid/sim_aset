@@ -122,6 +122,13 @@ class Posts extends \Phalcon\Mvc\Model
 	 * @var string
 	 * @Column(type="string", nullable=true)
 	 */
+	public $published_at;
+
+	/**
+	 *
+	 * @var string
+	 * @Column(type="string", nullable=true)
+	 */
 	public $created_at;
 
 	/**

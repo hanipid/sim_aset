@@ -34,6 +34,13 @@ return new Config([
             'edit',
             'create',
             'delete'
+        ],
+        'posts' => [
+            'index',
+            'search',
+            'edit',
+            'create',
+            'delete'
         ]
     ]
 ]);

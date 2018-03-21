@@ -8,16 +8,20 @@
 
 		<!-- Sidebar Links -->
 		<ul class="list-unstyled components">
+
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Home">
 				<a href="#homeSubmenu">
 					<i class="fa fa-home"></i>
 					<span class="sidebar-text">Home</span>
 				</a>
 			</li>
+
+
+
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Posts">
 
 				<a href="#postsSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "posts" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
-					<i class="fa fa-file-text"></i>
+					<i class="fa fa-thumb-tack"></i>
 					<span class="sidebar-text">Posts</span>
 				</a>
 
@@ -28,11 +32,37 @@
 					</li>
 
 					<li {% if dispatcher.getControllerName() == "posts" and dispatcher.getActionName() == "create" %}class="active"{% endif %}>
-						<a href="{{ url('posts/new') }}">New Post</a>
+						<a href="{{ url('posts/create') }}">Add New</a>
 					</li>
 
 				</ul>
 			</li>
+
+
+
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Pages">
+
+				<a href="#pagesSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "pages" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
+					<i class="fa fa-file-text"></i>
+					<span class="sidebar-text">Pages</span>
+				</a>
+
+				<ul id="pagesSubmenu" {% if dispatcher.getControllerName() == "pages" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+					
+					<li  {% if dispatcher.getControllerName() == "pages" and dispatcher.getActionName() == "index" %}class="active"{% endif %}>
+						<a href="{{ url('pages/index') }}">All Pages</a>
+					</li>
+					
+					<li  {% if dispatcher.getControllerName() == "pages" and dispatcher.getActionName() == "create" %}class="active"{% endif %}>
+						<a href="{{ url('pages/create') }}">Add New</a>
+					</li>
+
+				</ul>
+
+			</li>
+
+
+
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Categories" {% if dispatcher.getControllerName() == "categories" %}class="active"{% endif %}>
 
 				<a href="{{ url('categories') }}">
@@ -41,14 +71,17 @@
 				</a>
 
 			</li>
+
+
+
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Settings">
 
-				<a href="#pageSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
+				<a href="#settingsSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
 					<i class="fa fa-cog"></i>
 					<span class="sidebar-text">Settings</span>
 				</a>
 
-				<ul id="pageSubmenu" {% if dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+				<ul id="settingsSubmenu" {% if dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
 
 					<li {% if "basic_settings" == dispatcher.getControllerName() %}class="active"{% endif %}>
 						<a href="{{ url('basic_settings') }}">Basic</a>

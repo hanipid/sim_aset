@@ -6,8 +6,15 @@ use Phalcon\Logger;
 /**
   * Biar phalcon-dev dan webtools ga bingung cari lokasi model dan controller
   **/
-defined('BASE_PATH') || define('BASE_PATH', dirname(__DIR__));
-defined('APP_PATH') || define('APP_PATH', BASE_PATH );
+// defined('BASE_PATH') || define('BASE_PATH', dirname(__DIR__));
+// defined('APP_PATH') || define('APP_PATH', BASE_PATH );
+
+/*
+ * Modified: prepend directory path of current file, because of this file own different ENV under between Apache and command line.
+ * NOTE: please remove this comment.
+ */
+defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
+defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new Config([
     'database' => [
@@ -25,7 +32,7 @@ return new Config([
         'libraryDir'     => APP_PATH . '/library/',
         'pluginsDir'     => APP_PATH . '/plugins/',
         'cacheDir'       => BASE_PATH . '/cache/',
-        'baseUri'        => '/vokuro_bs3/',
+        'baseUri'        => preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]),
         'publicUrl'      => 'vokuro.phalconphp.com',
         'cryptSalt'      => 'eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D',
         'timezone'       => "Asia/Jakarta",
