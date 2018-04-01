@@ -8,7 +8,7 @@
     {% if dispatcher.getControllerName() == "index" OR dispatcher.getControllerName() == "session" %}
       {{ stylesheet_link('/css/telisir.css') }}
     {% else %}
-      {{ stylesheet_link('/css/admin-bs3.css') }}
+      {{ stylesheet_link('/css/admin-dark.css') }}
     {% endif %}
     {{ stylesheet_link('/css/bootstrap-datetimepicker.min.css') }}
     {{ stylesheet_link('/css/jquery.smartmenus.bootstrap.css') }}

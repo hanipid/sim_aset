@@ -2,8 +2,8 @@
 	<nav id="sidebar">
 		<!-- Sidebar Header -->
 		<div class="sidebar-header">
-			<h3>Vokuro</h3>
-			<strong>V</strong>
+			<h3>SIM ASET</h3>
+			<strong>SA</strong>
 		</div>
 
 		<!-- Sidebar Links -->
@@ -13,6 +13,33 @@
 				<a href="#homeSubmenu">
 					<i class="fa fa-home"></i>
 					<span class="sidebar-text">Home</span>
+				</a>
+			</li>
+
+
+
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Master Pegawai" {% if dispatcher.getControllerName() == "master_pegawai" %}class="active"{% endif %}>
+				<a href="{{ url('master_pegawai') }}">
+					<i class="fa fa-home"></i>
+					<span class="sidebar-text">Master Pegawai</span>
+				</a>
+			</li>
+
+
+
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Kode Barang" {% if dispatcher.getControllerName() == "kode_barang" %}class="active"{% endif %}>
+				<a href="{{ url('kode_barang/golongan') }}">
+					<i class="fa fa-home"></i>
+					<span class="sidebar-text">Kode Barang</span>
+				</a>
+			</li>
+
+
+
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Master Kepemilikan" {% if dispatcher.getControllerName() == "master_wilayah_lokasi" %}class="active"{% endif %}>
+				<a href="{{ url('master_wilayah_lokasi/masterKepemilikan') }}">
+					<i class="fa fa-home"></i>
+					<span class="sidebar-text">Master Kepemilikan</span>
 				</a>
 			</li>
 
@@ -105,7 +132,7 @@
 	</nav>
 
 	<div id="content">
-		<nav class="navbar navbar-inverse navbar-static-top">
+		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container-fluid">
 
 				<div class="navbar-header">

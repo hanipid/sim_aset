@@ -41,6 +41,12 @@ return new Config([
             'edit',
             'create',
             'delete'
+        ],
+        'master_pegawai' => [
+            'index',
+            'edit',
+            'create',
+            'delete'
         ]
     ]
 ]);
