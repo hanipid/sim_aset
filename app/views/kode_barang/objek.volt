@@ -11,15 +11,15 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation"><a href="{{ url('kode_barang/golongan') }}" class="btn">Golongan</a></li>
-        <li role="presentation" class="active"><a href="#" class="btn" aria-controls="bidang" role="tab" data-toggle="tab">Bidang</a></li>
-        <li role="presentation"><a href="#" class="btn" disabled="disabled" aria-controls="kelompok" role="tab" data-toggle="tab">Kelompok</a></li>
+        <li role="presentation"><a href="{{ url('kode_barang/bidang') }}" class="btn">Bidang</a></li>
+        <li role="presentation" class="active"><a href="#" class="btn" aria-controls="kelompok" role="tab" data-toggle="tab">Kelompok</a></li>
         <li role="presentation"><a href="#" class="btn" disabled="disabled" aria-controls="sub-kelompok" role="tab" data-toggle="tab">Sub Kelompok</a></li>
         <li role="presentation"><a href="#" class="btn" disabled="disabled" aria-controls="sub-sub-kelompok" role="tab" data-toggle="tab">Sub Sub Kelompok</a></li>
       </ul>
 
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="bidang">
+        <div role="tabpanel" class="tab-pane active" id="kelompok">
           <div class="pull-right">
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalTambah">Tambah</a>
           </div>
@@ -40,25 +40,16 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-primary">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Perkampungan</a>
                 </div>
                 <div class="col-xs-2">
-                  <a href="" class="btn btn-warning" data-toggle="modal" data-target="#modalEdit">Edit</a>
+                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalEdit">Edit</a>
                 </div>
               </div>              
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-success">Tanah</a>
-                </div>
-                <div class="col-xs-2">
-                  <a href="" class="btn btn-warning">Edit</a>
-                </div>
-              </div>              
-              
-              <div class="row">
-                <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-info">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Pertanian</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -67,7 +58,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-warning">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Perkebunan</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -76,7 +67,16 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-danger">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Campuran</a>
+                </div>
+                <div class="col-xs-2">
+                  <a href="" class="btn btn-warning">Edit</a>
+                </div>
+              </div>              
+              
+              <div class="row">
+                <div class="col-xs-10">
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Hutan</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -88,7 +88,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-o-primary">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Kolam Ikan</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -97,7 +97,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-o-success">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Danau / Rawa</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -106,7 +106,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-o-info">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Tandus / Rusak</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -115,7 +115,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-o-warning">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Alan - Alang dan Padang Rumput</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -124,7 +124,7 @@
               
               <div class="row">
                 <div class="col-xs-10">
-                  <a href="{{ url('kode_barang/kelompok') }}" class="btn btn-block btn-o-danger">Tanah</a>
+                  <a href="{{ url('kode_barang/subKelompok') }}" class="btn btn-block btn-primary">Tanah Pengguna Lain</a>
                 </div>
                 <div class="col-xs-2">
                   <a href="" class="btn btn-warning">Edit</a>
@@ -162,14 +162,15 @@
     </div>
 
   </div>
-</div>
+</div> <!-- .panel -->
+
 
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Tambah Bidang</h4>
+        <h4 class="modal-title">Tambah Kelompok</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -180,9 +181,9 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="nama_bidang" class="col-sm-2 control-label">Nama Bidang</label>
+            <label for="nama_bidang" class="col-sm-2 control-label">Nama Kelompok</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="nama_bidang" placeholder="Nama Bidang">
+              <input type="text" class="form-control" id="nama_bidang" placeholder="Nama Kelompok">
             </div>
           </div>
       </div>
@@ -200,7 +201,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Bidang</h4>
+        <h4 class="modal-title">Edit Kelompok</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -211,9 +212,9 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="nama_bidang" class="col-sm-2 control-label">Nama Bidang</label>
+            <label for="nama_bidang" class="col-sm-2 control-label">Nama Kelompok</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="nama_bidang" placeholder="Nama Bidang" value="Tanah">
+              <input type="text" class="form-control" id="nama_bidang" placeholder="Nama Kelompok" value="Perkampungan">
             </div>
           </div>
       </div>

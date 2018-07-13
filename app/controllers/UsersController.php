@@ -30,6 +30,21 @@ class UsersController extends ControllerBase
         $this->view->form = new UsersForm();
     }
 
+    public function userBaruAction()
+    {
+        # code...
+    }
+
+    public function tambahUserDataPeAction()
+    {
+        # code...
+    }
+
+    public function editUserAction()
+    {
+        # code...
+    }
+
     /**
      * Searches for users
      */

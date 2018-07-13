@@ -11,7 +11,10 @@ return new Config([
             'edit',
             'create',
             'delete',
-            'changePassword'
+            'changePassword',
+            'userBaru',
+            'tambahUserDataPe',
+            'editUser'
         ],
         'profiles' => [
             'index',

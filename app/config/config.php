@@ -22,7 +22,7 @@ return new Config([
         'host' => '127.0.0.1',
         'username' => 'root',
         'password' => 'secret',
-        'dbname' => 'vcms'
+        'dbname' => 'sim_aset'
     ],
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',
@@ -32,6 +32,7 @@ return new Config([
         'libraryDir'     => APP_PATH . '/library/',
         'pluginsDir'     => APP_PATH . '/plugins/',
         'cacheDir'       => BASE_PATH . '/cache/',
+        'helperDir'       => BASE_PATH . '/helper/',
         'baseUri'        => preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]),
         'publicUrl'      => 'vokuro.phalconphp.com',
         'cryptSalt'      => 'eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D',

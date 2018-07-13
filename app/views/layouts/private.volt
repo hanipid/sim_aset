@@ -28,7 +28,7 @@
 
 
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Kode Barang" {% if dispatcher.getControllerName() == "kode_barang" %}class="active"{% endif %}>
-				<a href="{{ url('kode_barang/golongan') }}">
+				<a href="{{ url('kode_barang/kelompok') }}">
 					<i class="fa fa-home"></i>
 					<span class="sidebar-text">Kode Barang</span>
 				</a>
@@ -108,7 +108,11 @@
 					<span class="sidebar-text">Settings</span>
 				</a>
 
-				<ul id="settingsSubmenu" {% if dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+				<ul id="settingsSubmenu" {% if dispatcher.getControllerName() == "setting_lokasi" or dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+
+					<li {% if "setting_lokasi" == dispatcher.getControllerName() %}class="active"{% endif %}>
+						<a href="{{ url('setting_lokasi') }}">Lokasi</a>
+					</li>
 
 					<li {% if "basic_settings" == dispatcher.getControllerName() %}class="active"{% endif %}>
 						<a href="{{ url('basic_settings') }}">Basic</a>
