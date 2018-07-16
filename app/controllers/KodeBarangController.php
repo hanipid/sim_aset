@@ -2,6 +2,7 @@
 namespace Vokuro\Controllers;
 
 use Vokuro\Models\Akun;
+use Vokuro\Models\VKodeBarang;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 /**
@@ -13,6 +14,41 @@ use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 */
 class KodeBarangController extends ControllerBase
 {
+
+  public function indexAction()
+  {
+    // $akun = Akun::find([
+    //   "status = 1"
+    // ]);
+    // $this->view->akun = $akun;
+
+    $currentPage  = (int) $_GET['p'];
+    $keywords     = (string) $_GET['keywords'];
+    if (! $currentPage) {
+        $currentPage = 1;
+    }
+    if (! $keywords) {
+      $keywords = null;
+    }
+
+    $v_kode_barang = VKodeBarang::find([
+      "nama LIKE ?1",
+      "bind" => ["1" => '%'.$keywords.'%']
+    ]);
+
+    $paginator = new PaginatorModel(
+      [
+        'data'  => $v_kode_barang,
+        'limit' => LIST_LIMIT,
+        'page'  => $currentPage,
+      ]
+    );
+
+    $this->view->setVars([
+      'paginator' => $paginator->getPaginate(),
+      'keywords' => $keywords
+    ]);
+  }
   
   public function initialize()
   {

@@ -28,7 +28,7 @@
 
 
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Kode Barang" {% if dispatcher.getControllerName() == "kode_barang" %}class="active"{% endif %}>
-				<a href="{{ url('kode_barang/kelompok') }}">
+				<a href="{{ url('kode_barang') }}">
 					<i class="fa fa-home"></i>
 					<span class="sidebar-text">Kode Barang</span>
 				</a>

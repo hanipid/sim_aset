@@ -13,12 +13,12 @@
       <?php 
         $tk = explode(".",$tmpKode); 
         // var_dump($tk);
-        // $tmpKode = $tk[0];
-        // for ($i = 1; $i < $level; $i++)
-        // {
-        //   $tmpKode .= '.'.$tk[$i];
-        // }
-        //   echo "<br>".$tmpKode.'<br>';
+        $tmpKode = $tk[0];
+        for ($i = 1; $i < $level; $i++)
+        {
+          $tmpKode .= '.'.$tk[$i];
+        }
+        //  echo "<br>".$tmpKode.'<br>';
         // <!--  -->
         // <!-- [[ kode buat menu tab menggunakan array push ]] -->
         // <!--  -->
@@ -105,7 +105,7 @@
                 {% endif %}
                   <ul class="pagination pagination-sm m-t-none m-b-none">
                       {% if paginator.current > 1 %}
-                          <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ idak, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
+                          <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ level ~ '/' ~ idak ~ '/' ~ tmpKode, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
                       {% endif %}
                       {% for pageIndex in startIndex..paginator.total_pages %}
                           {% if pageIndex is startIndex + 5 %}
@@ -113,12 +113,12 @@
                           {% endif %}
 
                           <li {% if pageIndex is paginator.current %}class="active"{% endif %}>
-                              {{ link_to(controller ~ '/' ~ action ~ '/' ~ idak ~ '?p=' ~ pageIndex, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
+                              {{ link_to(controller ~ '/' ~ action ~ '/' ~ level ~ '/' ~ idak ~ '/' ~ tmpKode ~ '?p=' ~ pageIndex, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
                           </li>
                       {% endfor %}
 
                       {% if paginator.current < paginator.total_pages %}
-                          <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ idak ~ '?p=' ~ paginator.last, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
+                          <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ level ~ '/' ~ idak ~ '/' ~ tmpKode ~ '?p=' ~ paginator.last, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
                       {% endif %}
                   </ul>
                 {% endif %}
