@@ -77,7 +77,7 @@ class KodeBarangController extends ControllerBase
           <div class="form-group">
             <label for="nama" class="col-sm-3 control-label">Uraian</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" id="nama" placeholder="Urian">
+              <input type="text" class="form-control" name="nama" id="nama" placeholder="Uraian">
             </div>
           </div>';
 
@@ -156,9 +156,9 @@ class KodeBarangController extends ControllerBase
             </div>
           </div>
           <div class="form-group">
-            <label for="nama" class="col-sm-3 control-label">Nama Jenis</label>
+            <label for="nama" class="col-sm-3 control-label">Uraian</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Jenis" value="'.$VKodeBarang->nama.'">
+              <input type="text" class="form-control" name="nama" id="nama" placeholder="Uraian" value="'.$VKodeBarang->nama.'">
             </div>
           </div>
           <div class="form-group">

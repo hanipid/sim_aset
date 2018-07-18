@@ -36,6 +36,24 @@
 
 
 
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Aset Kategori" {% if dispatcher.getControllerName() == "aset_kategori" %}class="active"{% endif %}>
+				<a href="{{ url('aset_kategori') }}">
+					<i class="fa fa-list"></i>
+					<span class="sidebar-text">Aset Kategori</span>
+				</a>
+			</li>
+
+
+
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Pengadaan Barang" {% if dispatcher.getControllerName() == "pengadaan_barang" %}class="active"{% endif %}>
+				<a href="{{ url('pengadaan_barang') }}">
+					<i class="fa fa-list"></i>
+					<span class="sidebar-text">Pengadaan Barang</span>
+				</a>
+			</li>
+
+
+
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Master Kepemilikan" {% if dispatcher.getControllerName() == "master_wilayah_lokasi" %}class="active"{% endif %}>
 				<a href="{{ url('master_wilayah_lokasi/masterKepemilikan') }}">
 					<i class="fa fa-home"></i>

@@ -9,17 +9,35 @@ use \Phalcon\Mvc\Model;
  */
 class Akun extends Model
 {
-	public function getChilds()
-    {
-        $result = false;
+  public $idak;
+  public $kdak;
+  public $nama;
+  public $level;
+  public $parent;
+  public $order;
+  public $status;
 
-        if($this->idak) {
-            $childs = self::find("parent = $this->idak");
-            if(count($childs)) {
-                $result = $childs;
-            }
-        }
+  public function initialize()
+  {
+    $this->hasMany(
+      "idak",
+      "Vokuro\Models\AsetKategori",
+      "akun_id",
+      ["alias" => "AsetKategori"]
+    );
+  }
+  
+  public function getChilds()
+  {
+    $result = false;
 
-        return $result;
+    if($this->idak) {
+      $childs = self::find("parent = $this->idak");
+      if(count($childs)) {
+        $result = $childs;
+      }
     }
+
+    return $result;
+  }
 }
