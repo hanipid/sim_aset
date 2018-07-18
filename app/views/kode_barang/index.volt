@@ -1,63 +1,27 @@
 {{ content() }}
 
-{%- macro drawMenu(menus = 0) %}
-
-  {%- for menu in menus %}
-  	<tr>
-  	{%  set haveChildren = menu.getChilds() %}
-  	<td>{{ menu.kdak }}</td>
-  	<td>
-  		{% if menu.level == 2 %}
-  			{{ menu.kdak }}
-  		{% endif %}
-  	</td>
-  	<td>
-  		{% if menu.level == 3 %}
-  			{{ menu.kdak }}
-  		{% endif %}</td>
-  	<td>
-  		{% if menu.level == 4 %}
-  			{{ menu.kdak }}
-  		{% endif %}</td>
-  	<td>
-  		{% if menu.level == 5 %}
-  			{{ menu.kdak }}
-  		{% endif %}</td>
-  	<td>
-  		{% if menu.level == 6 %}
-  			{{ menu.kdak }}
-  		{% endif %}
-  	</td>
-  	<td>
-  		{% if menu.level == 7 %}
-  			{{ menu.kdak }}
-  		{% endif %}</td>
-  	<td>{{ menu.nama }}</td>
-  	<td>{{ menu.idak }}</td>
-  	<td>{{ menu.kdak }}</td>
-  	<td>{{ menu.parent }}</td>
-    {%- if haveChildren %}
-    	<tr>
-    		{{ drawMenu(menu.getChilds()) }}
-    	</tr>
-    {%- endif %}
-    </tr>
-  {%- endfor %}
-{%- endmacro %} 
-
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Kode Barang</h3>
   </div>
-  <div class="panel-body">
-  	<form method="get" action="">
-  		<div class="form-group">
-		    <input type="text" class="form-control input-sm" id="keywords" name="keywords" placeholder="Cari...">
+  <div class="panel-body" style="padding:0 15px;">
+		<div class="" style="position: -webkit-sticky;position: sticky;top:0px;background:#FFF; padding:8px 0;">
+			<div class="">
+		  	<form method="get" action="">
+		  		<div class="form-group">
+		        {% if keywords != null or keywords != '' %}
+				    <input type="text" class="form-control input-sm" id="keywords" name="keywords" value ="{{keywords}}" placeholder="Cari...">
+		        {% else %}
+		        <input type="text" class="form-control input-sm" id="keywords" name="keywords" placeholder="Cari...">
+		        {% endif %}
+		      </div>
+		  	</form>
 		  </div>
-  	</form>
+		</div>
 		<table class="table table-condensed">
 			<thead>
 				<tr>
+					<th class="text-center">#</th>
 					<th width="70" class="text-center">Akun</th>
 					<th width="70" class="text-center">Kelompok</th>
 					<th width="70" class="text-center">Jenis</th>
@@ -72,6 +36,10 @@
 				{#{ drawMenu(akun) }#}
 				{% for vkb in paginator.items %}
 					<tr>
+						<td class="text-center">
+							<a href="#" onclick="loadModalTambah('{{vkb.kode}}')" data-toggle="modal" data-target="#modalTambah"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
+							<a href="#" onclick="loadDynamicContentModal('{{vkb.kode}}')" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-edit"></span></a>
+						</td>
 						<td class="text-center">{{ vkb.kode_level1 }}</td>
 						<td class="text-center">{{ vkb.kode_level2 }}</td>
 						<td class="text-center">{{ vkb.kode_level3 }}</td>
@@ -85,7 +53,7 @@
 			</tbody>
 		</table>
 
-		<nav aria-label="Page navigation">
+		<nav aria-label="Page navigation" style="position: -webkit-sticky;position: sticky;bottom:0px;background:#FFF;">
 		  {% if paginator.total_pages > 1 %}
 			  {% if keywords != null or keywords != '' %}
 			  	{% set keywords = "keywords=" ~ keywords %}
@@ -124,3 +92,98 @@
 		</nav>
 	</div> <!-- .panel-body -->
 </div> <!-- .panel.panel-primary -->
+
+<div class="modal fade" id="modalTambah" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Buat Kode Barang</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formCreateKode" method="post" action="{{url('kode_barang/createKode/')}}">
+          <div id="load-tambah"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Kode Barang</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formEditKode">
+          <div id="load-edit"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+  function loadModalTambah(kode) {
+    var options = {
+      modal : true,
+      height : 300,
+      width : 500
+    };
+    $('#load-tambah').load('{{ url("kode_barang/createKode/") }}'+kode);
+  }
+  $("#formEditKode").submit(function(e){
+  	let $form 			= $(this), 
+  			idak 				= $('input[name=idak]').val(),
+  			kodeRanting	= $('input[name=kodeRanting]').val()
+  			kodeDaun		= $('input[name=kodeDaun]').val(),
+  			nama				= $('input[name=nama]').val(),
+  			url					= "{{url('kode_barang/editKode/"+kodeRanting+"."+kodeDaun+"')}}",
+  			data 				= {
+  				idak:idak,
+  				kode:kodeDaun,
+  				nama:nama
+  			};
+  	$.post(url,data).done(function(){
+  		$('#modalEdit').modal('toggle');
+  		window.location = "{{url('kode_barang')}}";
+		});
+		e.preventDefault();
+  })
+  function loadDynamicContentModal(kode) {
+    var options = {
+      modal : true,
+      height : 300,
+      width : 500
+    };
+    $('#load-edit').load('{{ url("kode_barang/editKode/") }}'+kode);
+  }
+  $("#formEditKode").submit(function(e){
+  	let $form 			= $(this), 
+  			idak 				= $('input[name=idak]').val(),
+  			kodeRanting	= $('input[name=kodeRanting]').val()
+  			kodeDaun		= $('input[name=kodeDaun]').val(),
+  			nama				= $('input[name=nama]').val(),
+  			url					= "{{url('kode_barang/editKode/"+kodeRanting+"."+kodeDaun+"')}}",
+  			data 				= {
+  				idak:idak,
+  				kode:kodeDaun,
+  				nama:nama
+  			};
+  	$.post(url,data).done(function(){
+  		$('#modalEdit').modal('toggle');
+  		window.location = "{{url('kode_barang')}}";
+		});
+		e.preventDefault();
+  });
+</script>
