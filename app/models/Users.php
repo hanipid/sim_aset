@@ -167,5 +167,12 @@ class Users extends Model
                 'message' => 'User cannot be deleted because he/she has activity in the system'
             ]
         ]);
+
+        $this->hasMany('id', __NAMESPACE__ . '\TmpKontrak', 'users_id', [
+            'alias' => 'TmpKontrak',
+            'foreignKey' => [
+                'message' => 'User cannot be deleted because he/she has activity in the system'
+            ]
+        ]);
     }
 }
