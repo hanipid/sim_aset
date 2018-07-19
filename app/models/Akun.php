@@ -21,9 +21,15 @@ class Akun extends Model
   {
     $this->hasMany(
       "idak",
-      "Vokuro\Models\AsetKategori",
+      __NAMESPACE__ . "\AsetKategori",
       "akun_id",
       ["alias" => "AsetKategori"]
+    );
+    $this->hasMany(
+      "idak",
+      __NAMESPACE__ . "\TmpKibA",
+      "akun_idak",
+      ["alias" => "TmpKibA"]
     );
   }
   

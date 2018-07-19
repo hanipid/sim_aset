@@ -21,7 +21,7 @@
 	  	<div class="form-group">
 	  		<label for="" class="col-md-3 control-label">Nilai Kontrak</label>
 	  		<div class="col-md-9">
-	  			<input type="text" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak" value="{{tmp_kontrak.nilai_kontrak}}">
+	  			<input type="numeric" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak" value="{{tmp_kontrak.nilai_kontrak}}">
 	  		</div>
 	  	</div>
 	  	<div class="form-group">
@@ -32,7 +32,7 @@
 	  	</div>
 	  	<div class="form-group">
 	  		<div class="col-md-9 col-md-offset-3">
-	  			<button type="submit" class="btn btn-primary">Simpan</button>
+	  			<button type="submit" class="btn btn-primary">Update</button>
 	  		</div>
 	  	</div>
 	  </form>
@@ -40,7 +40,14 @@
 	  <hr>
 
 	  {% for ak in aset_kategori %}
-	  	<div class="col-md-4"><a href="#" onclick="loadModelLevel2({{ak.akun_id}})" class="btn btn-block btn-lg" style="background:{{ak.bg}};" data-toggle="modal" data-target="#level2">{{ak.label}}</a></div>
+	  	<div class="col-md-4">
+	  		<a href="#" onclick="loadModelLevel2({{ak.akun_id}})" class="btn btn-block btn-lg" style="background:{{ak.bg}};" data-toggle="modal" data-target="#level2">
+	  			{{ak.label|upper}} 
+	  			<span class="badge">
+	  				
+	  			</span>
+	  		</a>
+	  	</div>
 	  {% endfor %}
   </div> <!-- .panel-body -->
 </div>
@@ -58,26 +65,8 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" id="listModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <div id="load-list"></div>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 <script>
   function loadModelLevel2(akun_id) {
-    $('#demo-modal').load('{{ url("pengadaan_barang/level3/") }}'+akun_id);
-  }
-
-  function loadList(idak) {
-  	alert(idak)
-  	$("#load-list").load('{{ url("pengadaan_barang/listAkun/") }}'+idak)
+    $('#demo-modal').load('{{ url("pengadaan_barang/level3/"~tmp_kontrak.id_tmp_kontrak~"/") }}'+akun_id);
   }
 </script>

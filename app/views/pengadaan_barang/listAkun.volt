@@ -2,7 +2,10 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Pengadaan Barang</h3>
+    <h3 class="panel-title">
+    	<a href="{{url('pengadaan_barang/edit/'~id_tmp_kontrak)}}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    	Pengadaan Barang
+    </h3>
   </div>
   <div class="panel-body" style="padding:0 15px;">
   	<div class="" style="position: -webkit-sticky;position: sticky;top:0px;background:#FFF; padding:8px 0;">
@@ -32,7 +35,7 @@
 						<td></td>
 						<td>{{vkb.kode}}</td>
 						<td>
-							{% if vkb.level == 7 %}<a href="#" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>{% else %}{{vkb.nama}}{% endif %}
+							{% if vkb.level == 7 %}<a href="#" onclick="loadJumlahBarang({{id_tmp_kontrak}},{{vkb.idak}})" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>{% else %}{{vkb.nama}}{% endif %}
 						</td>
 					</tr>
 				{% endfor %}
@@ -58,7 +61,7 @@
 			  {% endif %}
 		    <ul class="pagination pagination-sm m-t-none m-b-none">
 		        {% if paginator.current > 1 %}
-		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?' ~ keywords, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
+		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ id_tmp_kontrak ~ '/' ~ akun.idak ~ '?' ~ keywords, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
 		        {% endif %}
 		        {% for pageIndex in startIndex..paginator.total_pages %}
 		            {% if pageIndex is startIndex + 5 %}
@@ -66,12 +69,12 @@
 		            {% endif %}
 
 		            <li {% if pageIndex is paginator.current %}class="active"{% endif %}>
-		                {{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?p=' ~ pageIndex ~ '&' ~ keywords, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
+		                {{ link_to(controller ~ '/' ~ action ~ '/' ~ id_tmp_kontrak ~ '/' ~ akun.idak ~ '?p=' ~ pageIndex ~ '&' ~ keywords, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
 		            </li>
 		        {% endfor %}
 
 		        {% if paginator.current < paginator.total_pages %}
-		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?p=' ~ paginator.last ~ '&' ~ keywords, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
+		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ id_tmp_kontrak ~ '/' ~ akun.idak ~ '?p=' ~ paginator.last ~ '&' ~ keywords, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
 		        {% endif %}
 		    </ul>
 		  {% endif %}
@@ -88,10 +91,9 @@
         Jumlah Barang
       </div>
       <div class="modal-body">
-        <div id="demo-modal">
-        	<form>
-        		<input type="text" class="form-control" name="jumlah" placeholder="Jumlah Barang">
-        </div>
+				<form method="post" action="{{url('pengadaan_barang/createKibA')}}">
+	        <div id="demo-modal">
+	        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -101,3 +103,13 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+	function loadJumlahBarang(id_tmp_kontrak,idak) {
+		$("#demo-modal").html(`
+      	<input type="hidden" class="form-control" name="id_tmp_kontrak" value="${id_tmp_kontrak}">
+      	<input type="hidden" class="form-control" name="idak" value="${idak}">
+      	<input type="text" class="form-control" name="jumlah" placeholder="Jumlah Barang">
+		`);
+	}
+</script>

@@ -5,7 +5,7 @@
     <h3 class="panel-title">Pengadaan Barang</h3>
   </div>
   <div class="panel-body">
-	  <form class="form-horizontal" method="post">
+	  <form class="form-horizontal" id="form" method="post">
 	  	<div class="form-group">
 	  		<label for="" class="col-md-3 control-label">Nomor Kontrak</label>
 	  		<div class="col-md-9">
@@ -21,7 +21,7 @@
 	  	<div class="form-group">
 	  		<label for="" class="col-md-3 control-label">Nilai Kontrak</label>
 	  		<div class="col-md-9">
-	  			<input type="text" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak">
+	  			<input type="numeric" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak">
 	  		</div>
 	  	</div>
 	  	<div class="form-group">
@@ -32,7 +32,7 @@
 	  	</div>
 	  	<div class="form-group">
 	  		<div class="col-md-9 col-md-offset-3">
-	  			<button type="submit" class="btn btn-primary">Update</button>
+	  			<button type="submit" class="btn btn-primary">Simpan</button>
 	  		</div>
 	  	</div>
 	  </form>

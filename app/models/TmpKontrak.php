@@ -22,6 +22,12 @@ class TmpKontrak extends Model
 	public function initialize()
 	{
 		$this->belongsTo("users_id", __NAMESPACE__ . "\Users", "id", ["alias" => "Users"]);
+    $this->hasMany(
+      "id_tmp_kontrak",
+      __NAMESPACE__ . "\TmpKibA",
+      "tmp_kontrak_id",
+      ["alias" => "TmpKibA"]
+    );
 
 		$this->addBehavior(
 			new Timestampable(array(
