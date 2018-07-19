@@ -21,6 +21,7 @@ class ControllerBase extends Controller
      */
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
+        define('LIST_LIMIT', 10);
         $controllerName = $dispatcher->getControllerName();
 
         // Only check permissions on private controllers

@@ -5,6 +5,7 @@ use Vokuro\Models\TmpKontrak;
 use Vokuro\Models\AsetKategori;
 use Vokuro\Models\Akun;
 use Vokuro\Models\VKodeBarang;
+use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 /**
  * Controller Pengadaan Barang
  */
@@ -84,19 +85,39 @@ class PengadaanBarangController extends ControllerBase
 
 	public function listAkunAction($idak)
 	{
+    $currentPage  = (int) $_GET['p'];
+    $keywords     = (string) $_GET['keywords'];
+    if (! $currentPage) {
+        $currentPage = 1;
+    }
+    if (! $keywords) {
+      $keywords = null;
+    }
+
 		$akun = Akun::findFirstByIdak($idak);
 		$parent = Akun::findFirstByIdak($akun->parent);
 		$VKodeBarang = VKodeBarang::find([
-			"kode_level2 = ?1 AND kode_level3 = ?2 AND level > 3",
+			"kode_level2 = ?1 AND kode_level3 = ?2 AND level > 3 AND nama LIKE ?3",
 			"bind" => [
 				"1" => $parent->kdak,
-				"2" => $akun->kdak
+				"2" => $akun->kdak,
+				"3" => '%'.$keywords.'%'
 			]
 		]);
+
+    $paginator = new PaginatorModel(
+      [
+        'data'  => $VKodeBarang,
+        'limit' => 10,
+        'page'  => $currentPage,
+      ]
+    );
 		$this->view->setVars([
 			"VKodeBarang" => $VKodeBarang,
 			"akun" => $akun,
-			"parent" => $parent
+			"parent" => $parent,
+      'paginator' => $paginator->getPaginate(),
+      'keywords' => $keywords
 		]);
 	}
 }

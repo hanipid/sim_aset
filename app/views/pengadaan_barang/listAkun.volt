@@ -27,11 +27,13 @@
 			</thead>
 
 			<tbody>
-				{% for vkb in VKodeBarang %}
+				{% for vkb in paginator.items %}
 					<tr>
 						<td></td>
 						<td>{{vkb.kode}}</td>
-						<td>{{vkb.nama}}</td>
+						<td>
+							{% if vkb.level == 7 %}<a href="#" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>{% else %}{{vkb.nama}}{% endif %}
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
@@ -44,7 +46,7 @@
 			  {% endif %}
 
 			  {% set controller = this.view.getControllerName()|lower  %}
-			  {% set action = this.view.getActionName()|lower %}
+			  {% set action = this.view.getActionName() %}
 			  {% set startIndex = 1 %}
 			  {% if paginator.total_pages > 5 %}
 			    {% if paginator.current > 3 %}
@@ -56,7 +58,7 @@
 			  {% endif %}
 		    <ul class="pagination pagination-sm m-t-none m-b-none">
 		        {% if paginator.current > 1 %}
-		            <li>{{ link_to(controller ~ '/' ~ action ~ '?' ~ keywords, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
+		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?' ~ keywords, 'data-page' : paginator.first, '<i class="fa fa-angle-double-left"></i>', 'title' : 'Go to page ' ~ paginator.next) }}</li>
 		        {% endif %}
 		        {% for pageIndex in startIndex..paginator.total_pages %}
 		            {% if pageIndex is startIndex + 5 %}
@@ -64,12 +66,12 @@
 		            {% endif %}
 
 		            <li {% if pageIndex is paginator.current %}class="active"{% endif %}>
-		                {{ link_to(controller ~ '/' ~ action ~ '?p=' ~ pageIndex ~ '&' ~ keywords, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
+		                {{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?p=' ~ pageIndex ~ '&' ~ keywords, pageIndex, 'data-page' : pageIndex, 'title' : 'Go to page ' ~ pageIndex) }}
 		            </li>
 		        {% endfor %}
 
 		        {% if paginator.current < paginator.total_pages %}
-		            <li>{{ link_to(controller ~ '/' ~ action ~ '?p=' ~ paginator.last ~ '&' ~ keywords, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
+		            <li>{{ link_to(controller ~ '/' ~ action ~ '/' ~ akun.idak ~ '?p=' ~ paginator.last ~ '&' ~ keywords, 'data-page' : paginator.last, '<i class="fa fa-angle-double-right"></i>', 'title' : 'Go to page ' ~ paginator.last) }}</li>
 		        {% endif %}
 		    </ul>
 		  {% endif %}
@@ -77,3 +79,25 @@
 
 	</div> <!-- .panel-body -->
 </div> <!-- .panel -->
+
+<div class="modal fade" id="jumlahBarang" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Jumlah Barang
+      </div>
+      <div class="modal-body">
+        <div id="demo-modal">
+        	<form>
+        		<input type="text" class="form-control" name="jumlah" placeholder="Jumlah Barang">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        	</form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
