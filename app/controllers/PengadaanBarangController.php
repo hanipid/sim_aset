@@ -84,12 +84,19 @@ class PengadaanBarangController extends ControllerBase
 
 	public function listAkunAction($idak)
 	{
-		$this->view->cleanTemplateBefore();
 		$akun = Akun::findFirstByIdak($idak);
-		$VKodeBarang = VKodeBarang::findByKodeLevel3($akun->kdak);
+		$parent = Akun::findFirstByIdak($akun->parent);
+		$VKodeBarang = VKodeBarang::find([
+			"kode_level2 = ?1 AND kode_level3 = ?2 AND level > 3",
+			"bind" => [
+				"1" => $parent->kdak,
+				"2" => $akun->kdak
+			]
+		]);
 		$this->view->setVars([
 			"VKodeBarang" => $VKodeBarang,
-			"akun" => $akun
+			"akun" => $akun,
+			"parent" => $parent
 		]);
 	}
 }
