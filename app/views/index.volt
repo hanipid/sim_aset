@@ -16,9 +16,9 @@
     <!-- Text Editor -->
     {{ stylesheet_link('summernote/summernote.css') }}
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {{ javascript_include('/js/jquery.min.js') }}
     {{ javascript_include('/js/moment.min.js') }}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {{ javascript_include('/js/bootstrap.min.js') }}
   </head>
   <body>
 

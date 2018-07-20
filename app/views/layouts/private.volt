@@ -45,11 +45,24 @@
 
 
 
-			<li data-toggle="tooltip" data-placement="right" data-original-title="Pengadaan Barang" {% if dispatcher.getControllerName() == "pengadaan_barang" %}class="active"{% endif %}>
-				<a href="{{ url('pengadaan_barang') }}">
+			<li data-toggle="tooltip" data-placement="right" data-original-title="Nama Barang">
+
+				<a href="#postsSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
 					<i class="fa fa-list"></i>
-					<span class="sidebar-text">Pengadaan Barang</span>
+					<span class="sidebar-text">Nama Barang</span>
 				</a>
+
+				<ul id="postsSubmenu" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+
+					<li {% if dispatcher.getControllerName() == "pengadaan_barang" and dispatcher.getActionName() == "create" %}class="active"{% endif %}>
+						<a href="{{ url('pengadaan_barang/create') }}">Pengadaan Barang</a>
+					</li>
+
+					<li {% if dispatcher.getControllerName() == "pengadaan_barang" and dispatcher.getActionName() == "index" %}class="active"{% endif %}>
+						<a href="{{ url('pengadaan_barang/') }}">Belum Teregister</a>
+					</li>
+
+				</ul>
 			</li>
 
 

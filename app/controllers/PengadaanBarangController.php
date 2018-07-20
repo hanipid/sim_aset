@@ -2,6 +2,7 @@
 namespace Vokuro\Controllers;
 
 use Vokuro\Models\TmpKontrak;
+use Vokuro\Models\VTmpKontrak;
 use Vokuro\Models\AsetKategori;
 use Vokuro\Models\Akun;
 use Vokuro\Models\VKodeBarang;
@@ -18,6 +19,35 @@ class PengadaanBarangController extends ControllerBase
 	}
 
 	public function indexAction()
+	{
+    $currentPage  = (int) $_GET['p'];
+    $keywords     = (string) $_GET['keywords'];
+    if (! $currentPage) {
+        $currentPage = 1;
+    }
+    if (! $keywords) {
+      $keywords = null;
+    }
+
+		$tmp_kontrak = VTmpKontrak::find([
+			"no LIKE ?1 OR tgl LIKE ?1 OR nilai_kontrak LIKE ?1 OR dana LIKE ?1",
+			"bind" => ["1" => '%'.$keywords.'%'],
+			"order" => "id_tmp_kontrak desc"
+		]);
+
+    $paginator = new PaginatorModel(
+      [
+        'data'  => $tmp_kontrak,
+        'limit' => LIST_LIMIT,
+        'page'  => $currentPage,
+      ]
+    );
+		$this->view->setVars([
+			"paginator" => $paginator->getPaginate()
+		]);
+	}
+
+	public function createAction()
 	{
 		if ($this->request->isPost()) {
 			$nomor_kontrak 	= $this->request->getPost("nomor_kontrak");
@@ -82,6 +112,32 @@ class PengadaanBarangController extends ControllerBase
 
 			$this->response->redirect("pengadaan_barang/edit/".$tmp_kontrak->id_tmp_kontrak);
  		}
+	}
+
+	public function deleteAction($id_tmp_kontrak)
+	{
+		if ($this->auth->getIdentity()['profile'] == "Administrators") {
+			$tmp_kontrak = TmpKontrak::findFirstByIdTmpKontrak($id_tmp_kontrak);
+
+			$tmp_kib_a = TmpKibA::findByTmpKontrakId($id_tmp_kontrak);
+
+			foreach ($tmp_kib_a as $tka) {
+				if (!$tka->delete()) {
+					foreach ($tka->getMessages() as $m) {
+						$this->flashSession->error("Terjadi kesalahan saat menghapus data kontrak (barang)");
+					}
+				}
+			}
+
+			if (!$tmp_kontrak->delete()) {
+				foreach ($tmp_kontrak->getMessages() as $m) {
+					$this->flashSession->error("Terjadi kesalahan saat menghapus data kontrak");
+				}
+			} else {
+				$this->flashSession->success("Berhasil menghapus data kontrak");
+			}
+		}
+		$this->response->redirect("pengadaan_barang");
 	}
 
 	public function level3Action($id_tmp_kontrak,$idak)
