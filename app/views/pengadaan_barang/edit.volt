@@ -2,41 +2,48 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Pengadaan Barang <span class="pull-right" data-toggle="modal" data-target="#listDataAset">List Data Aset</span></h3>
+    <h3 class="panel-title">Pengadaan Barang</h3>
 
   </div>
   <div class="panel-body">
-	  <form class="form-horizontal" method="post">
-	  	<div class="form-group">
-	  		<label for="" class="col-md-3 control-label">Nomor Kontrak</label>
-	  		<div class="col-md-9">
-	  			<input type="text" name="nomor_kontrak" class="form-control" placeholder="Nomor Kontrak" value="{{tmp_kontrak.no}}">
-	  		</div>
+	  <div class="row">
+	  	<div class="col-md-2">
+	  		<a href="#" data-toggle="modal" data-target="#listDataAset"><img class="img-responsive" src="{{url('public/img/icon.png')}}"></a>
 	  	</div>
-	  	<div class="form-group">
-	  		<label for="" class="col-md-3 control-label">Tanggal</label>
-	  		<div class="col-md-3">
-	  			<input type="date" name="tanggal" class="form-control" placeholder="Tanggal" value="{{tmp_kontrak.tgl}}">
-	  		</div>
+	  	<div class="col-md-10">
+	  		<form class="form-horizontal" method="post">
+			  	<div class="form-group">
+			  		<label for="" class="col-md-2 control-label">Nomor Kontrak</label>
+			  		<div class="col-md-9">
+			  			<input type="text" name="nomor_kontrak" class="form-control" placeholder="Nomor Kontrak" value="{{tmp_kontrak.no}}">
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<label for="" class="col-md-2 control-label">Tanggal</label>
+			  		<div class="col-md-3">
+			  			<input type="date" name="tanggal" class="form-control" placeholder="Tanggal" value="{{tmp_kontrak.tgl}}">
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<label for="" class="col-md-2 control-label">Nilai Kontrak</label>
+			  		<div class="col-md-9">
+			  			<input type="numeric" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak" value="{{tmp_kontrak.nilai_kontrak}}">
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<label for="" class="col-md-2 control-label">Sumber Dana</label>
+			  		<div class="col-md-9">
+			  			<input type="text" name="sumber_dana" class="form-control" placeholder="Sumber Dana" value="{{tmp_kontrak.dana}}">
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<div class="col-md-9 col-md-offset-2">
+			  			<button type="submit" class="btn btn-primary">Update</button>
+			  		</div>
+			  	</div>
+			  </form>
 	  	</div>
-	  	<div class="form-group">
-	  		<label for="" class="col-md-3 control-label">Nilai Kontrak</label>
-	  		<div class="col-md-9">
-	  			<input type="numeric" name="nilai_kontrak" class="form-control" placeholder="Nilai Kontrak" value="{{tmp_kontrak.nilai_kontrak}}">
-	  		</div>
-	  	</div>
-	  	<div class="form-group">
-	  		<label for="" class="col-md-3 control-label">Sumber Dana</label>
-	  		<div class="col-md-9">
-	  			<input type="text" name="sumber_dana" class="form-control" placeholder="Sumber Dana" value="{{tmp_kontrak.dana}}">
-	  		</div>
-	  	</div>
-	  	<div class="form-group">
-	  		<div class="col-md-9 col-md-offset-3">
-	  			<button type="submit" class="btn btn-primary">Update</button>
-	  		</div>
-	  	</div>
-	  </form>
+	  </div>
 
 	  <hr>
 
