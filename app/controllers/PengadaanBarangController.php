@@ -7,6 +7,7 @@ use Vokuro\Models\AsetKategori;
 use Vokuro\Models\Akun;
 use Vokuro\Models\VKodeBarang;
 use Vokuro\Models\TmpKibA;
+use Vokuro\Models\VTmpKibA;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 /**
  * Controller Pengadaan Barang
@@ -173,7 +174,7 @@ class PengadaanBarangController extends ControllerBase
     $paginator = new PaginatorModel(
       [
         'data'  => $VKodeBarang,
-        'limit' => 10,
+        'limit' => LIST_LIMIT,
         'page'  => $currentPage,
       ]
     );
@@ -237,5 +238,82 @@ class PengadaanBarangController extends ControllerBase
 			"idak" 						=> $idak,
 			"jumlah" 					=> $jumlah
 		]);
+	}
+
+	public function listKibAAction($id_tmp_kontrak)
+	{
+		$tmp_kib_a = VTmpKibA::findByTmpKontrakId($id_tmp_kontrak);
+
+    $currentPage  = (int) $_GET['p'];
+    $keywords     = (string) $_GET['keywords'];
+    if (! $currentPage) {
+        $currentPage = 1;
+    }
+    if (! $keywords) {
+      $keywords = null;
+    }
+
+    $paginator = new PaginatorModel(
+      [
+        'data'  => $tmp_kib_a,
+        'limit' => LIST_LIMIT,
+        'page'  => $currentPage,
+      ]
+    );
+
+		$this->view->setVars([
+			"paginator" => $paginator->getPaginate(),
+			"id_tmp_kontrak" => $id_tmp_kontrak
+		]);
+	}
+
+	public function editKibAAction($id_tmp_kib_a)
+	{
+		$tmp_kib_a = TmpKibA::findFirstByIdTmpKibA($id_tmp_kib_a);
+		$this->view->kib_a = $tmp_kib_a;
+
+		if ($this->request->isPost()) {
+			$luas_tanah 				= $this->request->getPost("luas_tanah");
+			$alamat 						= $this->request->getPost("alamat");
+			$status_tanah				= $this->request->getPost("status_tanah");
+			$tanggal_sertifikat	= $this->request->getPost("tanggal_sertifikat");
+			$nomor_sertifikat		= $this->request->getPost("nomor_sertifikat");
+			$penggunaan 				= $this->request->getPost("penggunaan");
+			$nilai_perolehan 		= $this->request->getPost("nilai_perolehan");
+			$keterangan 				= $this->request->getPost("keterangan");
+
+			$tmp_kib_a->luas = $luas_tanah;
+			$tmp_kib_a->letak = $alamat;
+			$tmp_kib_a->sts_tanah = $status_tanah;
+			$tmp_kib_a->tgl_sertifikat = $tanggal_sertifikat;
+			$tmp_kib_a->no_sertifikat = $nomor_sertifikat;
+			$tmp_kib_a->penggunaan = $penggunaan;
+			$tmp_kib_a->nilai_perolehan = $nilai_perolehan;
+			$tmp_kib_a->ket = $keterangan;
+
+			if (!$tmp_kib_a->save()) {
+				foreach ($tmp_kib_a->getMessages() as $m) {
+					$this->flashSession->error("Terjadi kesalahan saat mengupdate Kib A ".$m);
+				}
+			} else {
+				$this->flashSession->success("Data tersimpan");
+			}
+			$this->response->redirect("pengadaan_barang/listKibA/".$tmp_kib_a->tmp_kontrak_id);
+		}
+	}
+
+	public function deleteKibAAction($id_tmp_kib_a)
+	{
+		$tmp_kib_a = TmpKibA::findFirstByIdTmpKibA($id_tmp_kib_a);
+
+		if (!$tmp_kib_a->delete()) {
+			foreach ($tmp_kib_a->getMessages() as $m) {
+				$this->flashSession->error("Terjadi kesalahan saat menghapus data Kib A.".$m);
+			}
+		} else {
+			$this->flashSession->success("Berhasil menghapus data Kib A");
+		}
+
+		$this->response->redirect("pengadaan_barang/listKibA/".$tmp_kib_a->tmp_kontrak_id);
 	}
 }

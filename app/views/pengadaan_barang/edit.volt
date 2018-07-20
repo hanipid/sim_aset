@@ -8,7 +8,7 @@
   <div class="panel-body">
 	  <div class="row">
 	  	<div class="col-md-2">
-	  		<a href="#" data-toggle="modal" data-target="#listDataAset"><img class="img-responsive" src="{{url('public/img/icon.png')}}"></a>
+	  		<a href="{{url('pengadaan_barang/listKibA/'~tmp_kontrak.id_tmp_kontrak)}}"><img class="img-responsive" src="{{url('public/img/icon.png')}}"></a>
 	  		<br>
 	  		<a href="{{url('pengadaan_barang/delete/'~tmp_kontrak.id_tmp_kontrak)}}" class="btn btn-danger btn-block" onclick="return confirm('Apakah Anda yakin akan menghapus data kontrak ini? (barang-barang yang terdaftar juga akan terhapus dan tidak bisa diulang)')"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 	  	</div>
