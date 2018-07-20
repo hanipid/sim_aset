@@ -18,26 +18,31 @@
 		        {% endif %}
 		  	</form>
 		  </div>
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th width="80">#</th>
+						<th width="240">KODE</th>
+						<th>NAMA</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 
 		<table class="table table-condensed">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>KODE</th>
-					<th>NAMA</th>
-				</tr>
-			</thead>
-
-			<tbody>
+			<tbody >
 				{% for vkb in paginator.items %}
 					<tr 
 					{% if vkb.level == 4%}
-						style="background:#0000ff";
+						style="background:#B5D4EC; font-weight:700;"
+					{% elseif vkb.level == 5 %}
+						style="background:#CDE4F5; font-weight:700;"
+					{% elseif vkb.level == 6 %}
+						style="background:#E4F1FB; font-weight:700;"
 					{% endif %} 
 					>
-						<td></td>
-						<td>{{vkb.kode}}</td>
+						<td width="80"></td>
+						<td width="240">{{vkb.kode}}</td>
 						<td>
 							{% if vkb.level == 7 %}
 								<a href="#" onclick="loadJumlahBarang({{id_tmp_kontrak}},{{vkb.idak}})" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>
