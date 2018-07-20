@@ -51,10 +51,15 @@ class PengadaanBarangController extends ControllerBase
 		$tmp_kontrak 		= TmpKontrak::findFirstByIdTmpKontrak($idTmpKontrak);
 		$aset_kategori	= AsetKategori::find();
 		$tmp_kib_a 			= TmpKibA::find();
+		$list_data_aset = TmpKibA::find([
+			"tmp_kontrak_id = ?1",
+			"bind" => ["1" => $idTmpKontrak]
+		]);
 		$this->view->setVars([
 			"tmp_kontrak" => $tmp_kontrak,
 			"aset_kategori" => $aset_kategori,
-			"tmp_kib_a" => $tmp_kib_a
+			"tmp_kib_a" => $tmp_kib_a,
+			"list_data_aset" => $list_data_aset
 		]);
 
 		if ($this->request->isPost()) {

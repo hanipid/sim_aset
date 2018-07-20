@@ -58,10 +58,10 @@
   		</div>
   		<div class="form-group">
   			<div class="col-md-3 col-md-offset-3">
-  				<input type="text" name="id_tmp_kontrak" value="{{id_tmp_kontrak}}">
-  				<input type="text" name="idak" value="{{idak}}">
-  				<input type="text" name="jumlah" value="{{jumlah}}">
-  				<input type="text" name="is_new" value="1">
+  				<input type="hidden" name="id_tmp_kontrak" value="{{id_tmp_kontrak}}">
+  				<input type="hidden" name="idak" value="{{idak}}">
+  				<input type="hidden" name="jumlah" value="{{jumlah}}">
+  				<input type="hidden" name="is_new" value="1">
   				<button type="submit" class="btn btn-primary">Simpan</button>
   			</div>
   		</div>

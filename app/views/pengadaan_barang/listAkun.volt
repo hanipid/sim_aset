@@ -31,11 +31,19 @@
 
 			<tbody>
 				{% for vkb in paginator.items %}
-					<tr>
+					<tr 
+					{% if vkb.level == 4%}
+						style="background:#0000ff";
+					{% endif %} 
+					>
 						<td></td>
 						<td>{{vkb.kode}}</td>
 						<td>
-							{% if vkb.level == 7 %}<a href="#" onclick="loadJumlahBarang({{id_tmp_kontrak}},{{vkb.idak}})" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>{% else %}{{vkb.nama}}{% endif %}
+							{% if vkb.level == 7 %}
+								<a href="#" onclick="loadJumlahBarang({{id_tmp_kontrak}},{{vkb.idak}})" data-toggle="modal" data-target="#jumlahBarang" class="text-dark" style="color:#000;">{{vkb.nama}}</a>
+							{% else %}
+								{{vkb.nama}}
+							{% endif %}
 						</td>
 					</tr>
 				{% endfor %}

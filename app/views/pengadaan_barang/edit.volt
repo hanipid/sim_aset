@@ -2,7 +2,8 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Pengadaan Barang</h3>
+    <h3 class="panel-title">Pengadaan Barang <span class="pull-right" data-toggle="modal" data-target="#listDataAset">List Data Aset</span></h3>
+
   </div>
   <div class="panel-body">
 	  <form class="form-horizontal" method="post">
@@ -60,6 +61,36 @@
       </div>
       <div class="modal-body">
         <div id="demo-modal"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="listDataAset" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	Data List Kib A
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div id="load-data-aset">
+        	<table>
+        		<thead>
+        			<tr>
+        				<th>Uraian</th>
+        				<th>#</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+	        		{% for lda in list_data_aset %}
+	        			<tr>
+	        				<td></td>
+	        			</tr>
+	        		{% endfor %}
+        		</tbody>
+        	</table>
+        </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
