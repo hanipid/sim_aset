@@ -148,9 +148,11 @@ class KodeBarangController extends ControllerBase
               <input type="hidden" class="form-control" name="idak" id="idak" placeholder="Kode" value="'.$VKodeBarang->idak.'">
               <input type="hidden" class="form-control" name="level" id="level" placeholder="Level" value="'.$level.'">
               <input type="hidden" class="form-control" name="kodeRanting" id="kodeRanting" placeholder="Kode Ranting" value="'.$kodeRanting.'">
-              <div class="input-group">
-                <span class="input-group-addon">'.$kodeRanting.'. </span>
-                <input type="text" class="form-control" name="kodeDaun" id="kodeDaun" placeholder="Kode" value="'.$kodeDaun.'">
+              <div class="input-group">';
+              if ($level > 1) {
+                echo '<span class="input-group-addon">'.$kodeRanting.'. </span>';
+              }
+              echo '<input type="text" class="form-control" name="kodeDaun" id="kodeDaun" placeholder="Kode" value="'.$kodeDaun.'">
               </div>
             </div>
           </div>

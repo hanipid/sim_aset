@@ -18,10 +18,10 @@
 		  	</form>
 		  </div>
 		</div>
-		<table class="table table-condensed">
+		<table class="table table-condensed table-hover">
 			<thead>
 				<tr>
-					<th class="text-center">#</th>
+					<th class="text-center"><a href="#" data-toggle="modal" data-target="#modalTambahAkun"><span class="glyphicon glyphicon-plus"></span></a></th>
 					<th width="70" class="text-center">Akun</th>
 					<th width="70" class="text-center">Kelompok</th>
 					<th width="70" class="text-center">Jenis</th>
@@ -37,7 +37,7 @@
 				{% for vkb in paginator.items %}
 					<tr>
 						<td class="text-center">
-							<a href="#" onclick="loadModalTambah('{{vkb.kode}}')" data-toggle="modal" data-target="#modalTambah"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
+							{% if vkb.level < 7 %}<a href="#" onclick="loadModalTambah('{{vkb.kode}}')" data-toggle="modal" data-target="#modalTambah"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;{% endif %}
 							<a href="#" onclick="loadDynamicContentModal('{{vkb.kode}}')" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-edit"></span></a>
 						</td>
 						<td class="text-center">{{ vkb.kode_level1 }}</td>
@@ -92,6 +92,40 @@
 		</nav>
 	</div> <!-- .panel-body -->
 </div> <!-- .panel.panel-primary -->
+
+<div class="modal fade" id="modalTambahAkun" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Buat Kode Barang</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formCreateKode" method="post" action="{{url('kode_barang/createKode/')}}">
+         	<div class="form-group">
+            <label for="kode" class="col-sm-3 control-label">Kode</label>
+            <div class="col-sm-9">
+              <input type="hidden" class="form-control" name="parentLevel" id="parentLevel" placeholder="Level" value="0">
+              <div class="input-group">
+                <input type="text" class="form-control" name="kode" id="kode" placeholder="Kode">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nama" class="col-sm-3 control-label">Uraian</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="nama" id="nama" placeholder="Uraian">
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

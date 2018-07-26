@@ -28,7 +28,7 @@
 			</table>
 		</div>
 
-		<table class="table table-condensed table-bordered">
+		<table class="table table-condensed table-bordered table-hover">
 			{% for tk in paginator.items %}
 				<tr>
 					<td width="20" class="text-center">
