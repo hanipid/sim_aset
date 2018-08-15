@@ -44,12 +44,18 @@
   				<input type="text" class="form-control" name="penggunaan" placeholder="Penggunaan" value="{{kib_a.penggunaan}}">
   			</div>
   		</div>
-  		<div class="form-group">
-  			<label class="control-label col-md-3">Nilai Perolehan</label>
-  			<div class="col-md-9">
-  				<input type="text" class="form-control" name="nilai_perolehan" placeholder="Nilai Perolehan" value="{{kib_a.nilai_perolehan}}">
-  			</div>
-  		</div>
+      <div class="form-group">
+        <label class="control-label col-md-3">Nilai Perolehan</label>
+        <div class="col-md-9">
+          <input type="numeric" class="form-control" name="nilai_perolehan" placeholder="Nilai Perolehan" value="{{kib_a.nilai_perolehan}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3">Nilai Realisasi</label>
+        <div class="col-md-9">
+          <input type="numeric" class="form-control" name="nilai_realisasi" placeholder="Nilai Realisasi" value="{{kib_a.nilai_realisasi}}">
+        </div>
+      </div>
   		<div class="form-group">
   			<label class="control-label col-md-3">Keterangan</label>
   			<div class="col-md-9">

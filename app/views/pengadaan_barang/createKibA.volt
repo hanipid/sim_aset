@@ -7,7 +7,7 @@
     </h3>
   </div>
   <div class="panel-body">
-  	<form class="form-horizontal" method="post">
+  	<form class="form-horizontal" method="post" name="createKibA">
   		<div class="form-group">
   			<label class="control-label col-md-3">Luas Tanah (m²)</label>
   			<div class="col-md-9">
@@ -47,9 +47,15 @@
   		<div class="form-group">
   			<label class="control-label col-md-3">Nilai Perolehan</label>
   			<div class="col-md-9">
-  				<input type="text" class="form-control" name="nilai_perolehan" placeholder="Nilai Perolehan">
+  				<input type="numeric" class="form-control" name="nilai_perolehan" placeholder="Nilai Perolehan">
   			</div>
   		</div>
+      <div class="form-group">
+        <label class="control-label col-md-3">Nilai Realisasi</label>
+        <div class="col-md-9">
+          <input type="numeric" class="form-control" name="nilai_realisasi" placeholder="Nilai Realisasi">
+        </div>
+      </div>
   		<div class="form-group">
   			<label class="control-label col-md-3">Keterangan</label>
   			<div class="col-md-9">

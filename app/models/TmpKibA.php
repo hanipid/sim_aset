@@ -18,6 +18,7 @@ class TmpKibA extends Model
 	public $no_sertifikat;
 	public $pengunaan;
 	public $nilai_perolehan;
+	public $nilai_realisasi;
 	public $ket;
 
 	public function initialize()

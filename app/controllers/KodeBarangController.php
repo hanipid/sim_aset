@@ -3,6 +3,7 @@ namespace Vokuro\Controllers;
 
 use Vokuro\Models\Akun;
 use Vokuro\Models\VKodeBarang;
+use Vokuro\Models\TmpKibA;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 /**
@@ -131,7 +132,7 @@ class KodeBarangController extends ControllerBase
 
   public function editKodeAction($kode)
   {
-    $this->view->disable();
+    $this->view->cleanTemplateBefore();
 
     // $akun   = Akun::findFirstByIdak($idak);
     $VKodeBarang  = VKodeBarang::findFirstByKode($kode);
@@ -142,36 +143,23 @@ class KodeBarangController extends ControllerBase
       $kodeRanting .= '.'.$kodeTemp[$i];
     }
     $kodeDaun     = $kodeTemp[$level - 1];
-    echo '<div class="form-group">
-            <label for="kode" class="col-sm-3 control-label">Kode</label>
-            <div class="col-sm-9">
-              <input type="hidden" class="form-control" name="idak" id="idak" placeholder="Kode" value="'.$VKodeBarang->idak.'">
-              <input type="hidden" class="form-control" name="level" id="level" placeholder="Level" value="'.$level.'">
-              <input type="hidden" class="form-control" name="kodeRanting" id="kodeRanting" placeholder="Kode Ranting" value="'.$kodeRanting.'">
-              <div class="input-group">';
-              if ($level > 1) {
-                echo '<span class="input-group-addon">'.$kodeRanting.'. </span>';
-              }
-              echo '<input type="text" class="form-control" name="kodeDaun" id="kodeDaun" placeholder="Kode" value="'.$kodeDaun.'">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="nama" class="col-sm-3 control-label">Uraian</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" id="nama" placeholder="Uraian" value="'.$VKodeBarang->nama.'">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-3">
-              <a href="'.$this->url->getBaseUri().'kode_barang/deleteKode/'.$VKodeBarang->idak.'" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin?\')">Delete</a>
-            </div>
-          </div>';
+    $cariParent   = VKodeBarang::find([
+      "level = ?1",
+      "bind" => ["1" => $VKodeBarang->level - 1]
+    ]);
+    $this->view->setVars([
+      "kodeDaun" => $kodeDaun,
+      "kodeRanting" => $kodeRanting,
+      "VKodeBarang" => $VKodeBarang,
+      "cariParent" => $cariParent
+    ]);
 
     if ($this->request->isPost()) {
-      $idak = $this->request->getPost("idak");
-      $kode = $this->request->getPost("kode");
-      $nama = $this->request->getPost("nama");
+      $idak   = $this->request->getPost("idak");
+      $kode   = $this->request->getPost("kode");
+      $level  = $this->request->getPost("level");
+      $parent = $this->request->getPost("parent");
+      $nama   = $this->request->getPost("nama");
 
       $akun = Akun::findFirstByIdak($idak);
       if ($akun->level == 4 OR $akun->level == 5 OR $akun->level == 6) {
@@ -200,13 +188,15 @@ class KodeBarangController extends ControllerBase
       }
 
       if (!$found) {
-        $akun->kdak   = $kode;
-        $akun->nama   = $nama;
+        $akun->kdak     = $kode;
+        $akun->level    = $level;
+        $akun->parent   = $parent;
+        $akun->nama     = $nama;
 
         if (!$akun->save()) {
-          $this->flash->error($akun->getMessages());
+          $this->flashSession->error($akun->getMessages());
         } else {
-          $this->flash->success("Kode barang ".$nama." berhasil diubah");
+          $this->flashSession->success("Kode barang ".$nama." berhasil diubah");
           // $this->response->redirect("kode_barang/index/");
         }
       } else {
@@ -233,6 +223,56 @@ class KodeBarangController extends ControllerBase
     }
 
     $this->response->redirect("kode_barang/index/");
+  }
+
+  public function cariParentsAction()
+  {
+    $this->view->disable();
+    if ($this->request->isAjax()) {
+      $level = $this->request->getPost("level");
+      $akun   = VKodeBarang::find([
+        "level = ?1",
+        "bind" => ["1" => $level]
+      ]);
+      foreach ($akun as $a) {
+        $data[] = [
+          "nama" => $a->nama,
+          "idak" => $a->idak,
+          "kode" => $a->kode
+        ];
+      }
+      return $this->response->setContent(json_encode($data));
+    }
+  }
+
+  public function cekPenggunaanKodeAction()
+  {
+    $this->view->disable();
+    if ($this->request->isAjax()) {
+      $idak = $this->request->getPost("idak");
+      $kib_a = TmpKibA::find([
+        "akun_idak = ?1",
+        "bind" => ["1" => $idak]
+      ]);
+      $kode_barang = Akun::find([
+        "parent = ?1",
+        "bind" => ["1" => $idak]
+      ]);
+      foreach ($kib_a as $ka) {
+        $data[] = ["id" => $ka->id_tmp_kib_a];
+      }
+      foreach ($kode_barang as $kb) {
+        $data2[] = ["id" => $kb->idak];
+      }
+      if ($data) {
+        $data = 1; // dipakai di kib_a
+      } elseif ($data2) {
+        $data = 2; // adalah parent dari kode lain
+      } else {
+        $data = 0; // bukan parent dan tidak digunakan di kib_a, silakan hapus
+      }
+      return $this->response->setContent(json_encode($data));
+    }
   }
 
   public function kelompokAction()

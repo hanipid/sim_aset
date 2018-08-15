@@ -70,6 +70,7 @@ $di->set('view', function () {
             $compiler->addFunction('datetime', 'datetime');
             $compiler->addFunction('datetimezone', 'datetimezone');
             $compiler->addFunction('number_format', 'number_format');
+            $compiler->addFunction('explode', 'explode');
 
             return $volt;
         }

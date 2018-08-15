@@ -10,6 +10,7 @@
     {% else %}
       {{ stylesheet_link('/css/admin-dark.css') }}
     {% endif %}
+    {{ stylesheet_link('/css/jquery-ui.css') }}
     {{ stylesheet_link('/css/bootstrap-datetimepicker.min.css') }}
     {{ stylesheet_link('/css/jquery.smartmenus.bootstrap.css') }}
     {{ stylesheet_link('/css/style.css') }}
@@ -18,6 +19,8 @@
     
     {{ javascript_include('/js/jquery.min.js') }}
     {{ javascript_include('/js/moment.min.js') }}
+    {{ javascript_include('/js/jquery-ui.js') }}
+    {{ javascript_include('/js/jquery-sortable.js') }}
     {{ javascript_include('/js/bootstrap.min.js') }}
   </head>
   <body>
@@ -200,43 +203,35 @@
           "use strict";
           // When ready.
           $(function() {
-              var $form = $( "#form" );
+              var $form = $( "form" );
               var $input = $form.find( "input[type='numeric']" );
-              $input.on( "keyup", function( event ) {
-                  // When user select text in the document, also abort.
-                  var selection = window.getSelection().toString();
-                  if ( selection !== '' ) {
-                      return;
-                  }
-                  // When the arrow keys are pressed, abort.
-                  if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
-                      return;
-                  }
-                  var $this = $( this );
-                  // Get the value.
-                  var input = $this.val();
-                  var input = input.replace(/[\D\s\._\-]+/g, "");
-                          input = input ? parseInt( input, 10 ) : 0;
-                          $this.val( function() {
-                              return ( input === 0 ) ? "" : input.toLocaleString( "id-ID" );
-                          } );
-              } );
-              /**
-               * ==================================
-               * When Form Submitted
-               * ==================================
-               */
-              // $form.on( "submit", function( event ) {                  
-              //     var $this = $( this );
-              //     var arr = $this.serializeArray();              
-              //     for (var i = 0; i < arr.length; i++) {
-              //             arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
-              //     };                  
-              //     console.log( arr );                  
-              //     event.preventDefault();
-              // });              
+              $input.on( "keyup", inputNumeric );
+              $("form[name='createKibA'] input[name='nilai_perolehan']").on("keyup", function () {
+                $("input[name='nilai_realisasi']").val($(this).val());
+              })
+              $input.each(inputNumeric);
           });
       })(jQuery); // E.O Thousand separator
+
+      var inputNumeric = function (event) {
+        // When user select text in the document, also abort.
+        var selection = window.getSelection().toString();
+        if ( selection !== '' ) {
+            return;
+        }
+        // When the arrow keys are pressed, abort.
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+            return;
+        }
+        var $this = $( this );
+        // Get the value.
+        var input = $this.val();
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : 0;
+        $this.val( function() {
+            return ( input === 0 ) ? "" : input.toLocaleString( "id-ID" );
+        } );
+      } // E.O Input Numeric
     }); // E.O. (document).ready()
     </script>
   </body>

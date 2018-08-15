@@ -3,6 +3,7 @@ namespace Vokuro\Controllers;
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
+use Vokuro\Models\UserLog;
 
 /**
  * ControllerBase
@@ -21,7 +22,7 @@ class ControllerBase extends Controller
    */
   public function beforeExecuteRoute(Dispatcher $dispatcher)
   {
-    define('LIST_LIMIT', 10);
+    define('LIST_LIMIT', 10);    
     $controllerName = $dispatcher->getControllerName();
 
     // Only check permissions on private controllers
@@ -63,6 +64,16 @@ class ControllerBase extends Controller
         return false;
       }
     }
+    
+    $data = [
+        "uri" => $this->router->getRewriteUri(),
+        "content" => $_POST
+    ];
+
+    $user_log = new UserLog();
+    $user_log->user_id = $this->auth->getUser()->id;
+    $user_log->data = json_encode($data);
+    $user_log->save();
   }
   
   protected function _redirectBack() {

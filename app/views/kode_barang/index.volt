@@ -178,22 +178,27 @@
   }
   $("#formEditKode").submit(function(e){
   	let $form 			= $(this), 
-  			idak 				= $('input[name=idak]').val(),
-  			kodeRanting	= $('input[name=kodeRanting]').val()
-  			kodeDaun		= $('input[name=kodeDaun]').val(),
-  			nama				= $('input[name=nama]').val(),
+  			idak 				= $('input[name=idak_edit]').val(),
+  			kodeRanting	= $('input[name=kodeRanting_edit]').val(),
+  			kodeDaun		= $('input[name=kodeDaun_edit]').val(),
+      	level       = $('select[name=level_edit]').val(),
+        parent      = $('select[name=parent_edit]').val(),
+  			nama				= $('input[name=nama_edit]').val(),
   			url					= "{{url('kode_barang/editKode/"+kodeRanting+"."+kodeDaun+"')}}",
   			data 				= {
   				idak:idak,
   				kode:kodeDaun,
+  				level:level,
+  				parent:parent,
   				nama:nama
   			};
+    alert(level+parent);
   	$.post(url,data).done(function(){
   		$('#modalEdit').modal('toggle');
   		window.location = "{{url('kode_barang')}}";
 		});
 		e.preventDefault();
-  })
+  });
   function loadDynamicContentModal(kode) {
     var options = {
       modal : true,
@@ -202,22 +207,4 @@
     };
     $('#load-edit').load('{{ url("kode_barang/editKode/") }}'+kode);
   }
-  $("#formEditKode").submit(function(e){
-  	let $form 			= $(this), 
-  			idak 				= $('input[name=idak]').val(),
-  			kodeRanting	= $('input[name=kodeRanting]').val()
-  			kodeDaun		= $('input[name=kodeDaun]').val(),
-  			nama				= $('input[name=nama]').val(),
-  			url					= "{{url('kode_barang/editKode/"+kodeRanting+"."+kodeDaun+"')}}",
-  			data 				= {
-  				idak:idak,
-  				kode:kodeDaun,
-  				nama:nama
-  			};
-  	$.post(url,data).done(function(){
-  		$('#modalEdit').modal('toggle');
-  		window.location = "{{url('kode_barang')}}";
-		});
-		e.preventDefault();
-  });
 </script>

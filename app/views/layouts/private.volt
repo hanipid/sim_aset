@@ -47,12 +47,12 @@
 
 			<li data-toggle="tooltip" data-placement="right" data-original-title="Nama Barang">
 
-				<a href="#postsSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
+				<a href="#namaBarangSubmenu" data-toggle="collapse" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true"{% else %}aria-expanded="false"{% endif %}>
 					<i class="fa fa-list"></i>
 					<span class="sidebar-text">Nama Barang</span>
 				</a>
 
-				<ul id="postsSubmenu" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+				<ul id="namaBarangSubmenu" {% if dispatcher.getControllerName() == "pengadaan_barang" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
 
 					<li {% if dispatcher.getControllerName() == "pengadaan_barang" and dispatcher.getActionName() == "create" %}class="active"{% endif %}>
 						<a href="{{ url('pengadaan_barang/create') }}">Pengadaan Barang</a>
@@ -139,7 +139,7 @@
 					<span class="sidebar-text">Settings</span>
 				</a>
 
-				<ul id="settingsSubmenu" {% if dispatcher.getControllerName() == "setting_lokasi" or dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
+				<ul id="settingsSubmenu" {% if dispatcher.getControllerName() == "setting_lokasi" or dispatcher.getControllerName() == "basic_settings" or dispatcher.getControllerName() == "users" or dispatcher.getControllerName() == "profiles" or dispatcher.getControllerName() == "permissions" or dispatcher.getControllerName() == "menus" %}aria-expanded="true" class="collapse in list-unstyled"{% else %}aria-expanded="false" class="collapse list-unstyled"{% endif %}>
 
 					<li {% if "setting_lokasi" == dispatcher.getControllerName() %}class="active"{% endif %}>
 						<a href="{{ url('setting_lokasi') }}">Lokasi</a>
@@ -159,6 +159,10 @@
 
 					<li {% if "permissions" == dispatcher.getControllerName() %}class="active"{% endif %}>
 						<a href="{{ url('permissions') }}">Permissions</a>
+					</li>
+
+					<li {% if "menus" == dispatcher.getControllerName() %}class="active"{% endif %}>
+						<a href="{{ url('menus') }}">Menus</a>
 					</li>
 
 				</ul>

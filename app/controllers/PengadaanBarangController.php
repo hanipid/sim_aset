@@ -58,10 +58,10 @@ class PengadaanBarangController extends ControllerBase
 
 			$tmp_kontrak 								= new TmpKontrak();
 			$tmp_kontrak->users_id 			= $this->auth->getIdentity()['id'];
-			$tmp_kontrak->no 						= $this->request->getPost("nomor_kontrak");
-			$tmp_kontrak->tgl 					= $this->request->getPost("tanggal");
-			$tmp_kontrak->nilai_kontrak	= $this->request->getPost("nilai_kontrak");
-			$tmp_kontrak->dana 					= $this->request->getPost("sumber_dana");
+			$tmp_kontrak->no 						= $nomor_kontrak;
+			$tmp_kontrak->tgl 					= $tanggal;
+			$tmp_kontrak->nilai_kontrak	= str_replace(".", "", $nilai_kontrak);
+			$tmp_kontrak->dana 					= $sumber_dana;
 
 			if (!$tmp_kontrak->save()) {
 				$this->flashSession->error("Terjadi kesalahan saat membuat kontrak baru");
@@ -100,10 +100,10 @@ class PengadaanBarangController extends ControllerBase
 			$sumber_dana		= $this->request->getPost("sumber_dana");
 
 			$tmp_kontrak->users_id 			= $this->auth->getIdentity()['id'];
-			$tmp_kontrak->no 						= $this->request->getPost("nomor_kontrak");
-			$tmp_kontrak->tgl 					= $this->request->getPost("tanggal");
-			$tmp_kontrak->nilai_kontrak	= $this->request->getPost("nilai_kontrak");
-			$tmp_kontrak->dana 					= $this->request->getPost("sumber_dana");
+			$tmp_kontrak->no 						= $nomor_kontrak;
+			$tmp_kontrak->tgl 					= $tanggal;
+			$tmp_kontrak->nilai_kontrak	= str_replace(".", "", $nilai_kontrak);
+			$tmp_kontrak->dana 					= $sumber_dana;
 
 			if (!$tmp_kontrak->save()) {
 				$this->flashSession->error("Terjadi kesalahan saat mengubah data kontrak");
@@ -203,6 +203,7 @@ class PengadaanBarangController extends ControllerBase
 			$nomor_sertifikat		= $this->request->getPost("nomor_sertifikat");
 			$penggunaan 				= $this->request->getPost("penggunaan");
 			$nilai_perolehan 		= $this->request->getPost("nilai_perolehan");
+			$nilai_realisasi 		= $this->request->getPost("nilai_realisasi");
 			$keterangan 				= $this->request->getPost("keterangan");
 
 			$tmp_kib_a = new TmpKibA();
@@ -214,7 +215,8 @@ class PengadaanBarangController extends ControllerBase
 			$tmp_kib_a->tgl_sertifikat = $tanggal_sertifikat;
 			$tmp_kib_a->no_sertifikat = $nomor_sertifikat;
 			$tmp_kib_a->penggunaan = $penggunaan;
-			$tmp_kib_a->nilai_perolehan = $nilai_perolehan;
+			$tmp_kib_a->nilai_perolehan = str_replace(".", "", $nilai_perolehan);
+			$tmp_kib_a->nilai_realisasi = str_replace(".", "", $nilai_realisasi);
 			$tmp_kib_a->ket = $keterangan;
 
 			if (!$tmp_kib_a->save()) {
@@ -280,6 +282,7 @@ class PengadaanBarangController extends ControllerBase
 			$nomor_sertifikat		= $this->request->getPost("nomor_sertifikat");
 			$penggunaan 				= $this->request->getPost("penggunaan");
 			$nilai_perolehan 		= $this->request->getPost("nilai_perolehan");
+			$nilai_realisasi 		= $this->request->getPost("nilai_realisasi");
 			$keterangan 				= $this->request->getPost("keterangan");
 
 			$tmp_kib_a->luas = $luas_tanah;
@@ -288,7 +291,8 @@ class PengadaanBarangController extends ControllerBase
 			$tmp_kib_a->tgl_sertifikat = $tanggal_sertifikat;
 			$tmp_kib_a->no_sertifikat = $nomor_sertifikat;
 			$tmp_kib_a->penggunaan = $penggunaan;
-			$tmp_kib_a->nilai_perolehan = $nilai_perolehan;
+			$tmp_kib_a->nilai_perolehan = str_replace(".", "", $nilai_perolehan);
+			$tmp_kib_a->nilai_realisasi = str_replace(".", "", $nilai_realisasi);
 			$tmp_kib_a->ket = $keterangan;
 
 			if (!$tmp_kib_a->save()) {

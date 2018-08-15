@@ -15,7 +15,7 @@
 </div>
 
 {% if page.items %}
-  <table class="table table-striped" align="center">
+  <table class="table table-condensed table-hover" align="center">
     <thead>
       <tr>
         <th>Publish Date</th>
