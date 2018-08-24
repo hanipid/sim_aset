@@ -29,7 +29,7 @@
 			</table>
 		</div>
 
-		<table class="table table-condensed">
+		<table class="table table-condensed table-hover">
 			<tbody >
 				{% for vkb in paginator.items %}
 					<tr 

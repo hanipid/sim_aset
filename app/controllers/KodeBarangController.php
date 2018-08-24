@@ -172,20 +172,33 @@ class KodeBarangController extends ControllerBase
       $findParent = Akun::find([
         "parent = ?1 AND idak != ?2",
         "bind" => [
-          1 => $akun->parent,
+          1 => $parent,
           2 => $akun->idak
         ]
       ]);
+
       $found = false;
       $i=0;
+      // cek ada kode yang sama
       foreach ($findParent as $fp) {
-        if ($fp->kdak == $kode) {
-          // ada kode yang sama
+        if ($fp->kdak === $kode) {
           $found = true;
           $i++;
           $fidak = $fp->idak;
         }
       }
+
+      // cek jika memiliki children / sub kode
+      // $findChildren = Akun::find([
+      //   "parent = ?1",
+      //   "bind" => ["1" => $idak]
+      // ]);
+      // $haveChildren = false;
+      // foreach ($findChildren as $fc) {
+      //   if ($fc->parent === $idak) {
+      //     $haveChildren = true;
+      //   }
+      // }
 
       if (!$found) {
         $akun->kdak     = $kode;
@@ -197,7 +210,6 @@ class KodeBarangController extends ControllerBase
           $this->flashSession->error($akun->getMessages());
         } else {
           $this->flashSession->success("Kode barang ".$nama." berhasil diubah");
-          // $this->response->redirect("kode_barang/index/");
         }
       } else {
         $this->flashSession->error("Kode barang ".$nama." harus unik");

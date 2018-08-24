@@ -35,7 +35,20 @@
 			<tbody>
 				{#{ drawMenu(akun) }#}
 				{% for vkb in paginator.items %}
-					<tr>
+					<tr
+          {% if vkb.level == 1 %}
+            style="background:#4F8AFF; font-weight:700;"
+          {% elseif vkb.level == 2 %}
+            style="background:#6FA2FF; font-weight:700;"
+          {% elseif vkb.level == 3 %}
+            style="background:#8EBAFF; font-weight:700;"
+          {% elseif vkb.level == 4 %}
+            style="background:#AED1FF; font-weight:700;"
+          {% elseif vkb.level == 5 %}
+            style="background:#CDE9FF; font-weight:700;"
+          {% elseif vkb.level == 6 %}
+            style="background:#E8FFFF; font-weight:700;"
+          {% endif %} >
 						<td class="text-center">
 							{% if vkb.level < 7 %}<a href="#" onclick="loadModalTambah('{{vkb.kode}}')" data-toggle="modal" data-target="#modalTambah"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;{% endif %}
 							<a href="#" onclick="loadDynamicContentModal('{{vkb.kode}}')" data-toggle="modal" data-target="#modalEdit"><span class="glyphicon glyphicon-edit"></span></a>
